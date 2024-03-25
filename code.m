@@ -1,0 +1,1 @@
+a = load("vent_1_mois.mat");
