@@ -3,7 +3,7 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
     dy=1/(Ny+1);
     dt=T/Nt;
     c=zeros(Nx+2,Ny+2);
-    c=c0; %On initialise avec les conditions initiales.
+    c(2:Nx+1, 2:Ny+1)=c0; %On initialise avec les conditions initiales.
 
     %Resolution numérique avec Diffusion et convection, et vitesse Ux,Uy (vent)
     figure()
@@ -13,6 +13,9 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
         derivee_y = (c(2:Nx+1,3:Ny+2)-c(2:Nx+1,1:Ny)) / (2*dy);
 
         c(2:Nx+1,2:Ny+1) = max(0, c(2:Nx+1,2:Ny+1) + dt * D * laplacien - dt * Ux(:,:,n) .* derivee_x - dt * Uy(:,:,n) .* derivee_y);
+        heatmap(c)
+        clim([0 0.5])
+        pause(0.01)
 
     end
 end
