@@ -1,3 +1,4 @@
+close all;
 a = load("vent_1_mois.mat");
 
 
@@ -17,8 +18,8 @@ latitude = a.latitude;
  %   quiver(Ux(:, :, t), Uy(:, :, t))
 %end
 
-Nx = 20;
-Ny = 20;
+Nx = 10;
+Ny = 10;
 Nt = 200;
 T = 2;
 c0 = zeros(Nx, Ny) + 10*eye(Nx, Ny);
@@ -31,3 +32,4 @@ D = 0.1; % Coefficient de diffusion (peut être modifié selon votre cas)
 
 % Appel de la fonction
 c = ToySchemeC4(Nx, Ny, Nt, T, c0, Ux, Uy, D)
+
