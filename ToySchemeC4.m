@@ -14,9 +14,8 @@ figure()
         derivee_x = (c(3:Nx+2,2:Ny+1) - c(1:Nx,2:Ny+1)) / (2*dx);
         derivee_y = (c(2:Nx+1,3:Ny+2)-c(2:Nx+1,1:Ny)) / (2*dy);
 
-        c(2:Nx+1,2:Ny+1) = c(2:Nx+1,2:Ny+1) + dt * D * laplacien_x + dt * D * laplacien_y - dt * Ux(:,:,n) .* derivee_x - dt * Uy(:,:,n) .* derivee_y;
+        c(2:Nx+1,2:Ny+1) = c(2:Nx+1,2:Ny+1) + dt * D * laplacien_x + dt * D * laplacien_y - dt * Ux(:,:,n) * derivee_x - dt * Uy(:,:,n) * derivee_y;
         heatmap(c);
-        hold on;
         pause(0.01);
     end
 end
