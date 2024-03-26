@@ -1,11 +1,11 @@
-function m = FirstScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,tau)
+function m = FirstSchemeC4(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,tau)
     dx = X/Nx;
     dy = Y/Ny;
     dt=T/Nt;
     m=zeros(p,Nx+2,Ny+2); 
     %Conditions aux bords => m(x,y,t) = 0 aux bords
     %tau c'est le temps caractéristique de chaque polluant.
-    for i=1:Nt %On loop mar on a seuleument besoin de la moncentration finale
+    for i=1:Nt %On loop car on a seuleument besoin de la concentration finale
            
         j = 1:p; %Pour chaque polluant, indicé par j
         
