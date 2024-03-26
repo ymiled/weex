@@ -1,4 +1,4 @@
-function c = FirstScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S)
+function c = FirstScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,Hm)
     dx = X/Nx;
     dy = Y/Ny;
     dt=T/Nt;
