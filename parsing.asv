@@ -1,18 +1,47 @@
 %% Parsing du fichier map.xlsx
 T = readtable("map.xlsx");
 %T = sortrows(T, "id_grid")
-idx = T.emissionSiteID == "C4"
-rep = T(idx, :)
+id_s1 = T.emissionSiteID == "C4";
 nbr_x = 95;
 nbr_y = 62;
-lst_pols = ["Benzo_a_Pyr_ne", "x2_3_7_8TCDD", "CadmiumEtCompos_s_exprim_sEnTantQueCd_", "CuivreEtCompos_s_exprim_sEnTantQueCu_", "MercureEtCompos_s_exprim_sEnTantQueHg_", "PlombEtCompos_s_exprim_sEnTantQuePb_", "ZincEtCompos_s_exprim_sEnTantQueZn_"]
-Source = zeros(62, 95, length(lst_pols));
-for pol =1:len(lst_pol)
-    
+lst_polluants = ["Benzo_a_Pyr_ne", "x2_3_7_8TCDD", "CadmiumEtCompos_s_exprim_sEnTantQueCd_", "CuivreEtCompos_s_exprim_sEnTantQueCu_", "MercureEtCompos_s_exprim_sEnTantQueHg_", "PlombEtCompos_s_exprim_sEnTantQuePb_", "ZincEtCompos_s_exprim_sEnTantQueZn_"]
+lst_infos = ["id_grid" lst_polluants]
+sources = zeros(nbr_x, nbr_y, length(lst_polluants));
+rep = T{id_s1, lst_infos};
+taille = size(rep);
+nbr_sources = taille(1)
+for i=1:nbr_sources
+    id = rep(i, 1)
+    x = floor((rep(i, 1)-1)/nbr_y) + 1
+    y = mod(rep(i, 1)-1 , nbr_y) + 1
+    sources(x, y, :) = rep(i, 2:end);
 end
-
-
-
+endroit_ile = (T.cellType == "island");
+T.ratio_air_urbain =  T.urbanSoilArea_km_ ./ T.cellTotalArea_km_;
+size(ratio_air_urbain)
+ratio_air = zeros(nbr_x, nbr_y, 1);
+size(ratio_air)
+for i=1:length(T.id_grid)
+    id = T{i, "id_grid"};
+    x = floor((id-1)/nbr_y)+1;
+    y = mod(id-1 , nbr_y)+1;
+    ratio_air(x, y) = T{id, "ratio_air_urbain"};
+end
+Nt = 8 * 365;
+rain_matrix = zeros(nbr_x, nbr_y, Nt);
+for i=1:1%length(T.id_grid)
+    id = T{i, "id_grid"};
+    x = floor((id-1)/nbr_y)+1;
+    y = mod(id-1 , nbr_y)+1;
+    hauteur = T{id, "precipitation_mm_year"};
+    samples = datasample(0:hauteur, Nt)
+    pluie = [0 samples] .- 
+    rain_matrix(x, y, :) = ones(Nt, 1)* T{id, "precipitation_mm_year"} / Nt;
+    rain_matrix(x, y, :) = ones(Nt, 1)* T{id, "precipitation_mm_year"} / Nt;
+end
+rain_matrix(:, :, 1)
+% ratio_air
+% T(id_s1, :)
 %T{idx, "id_grid"} = 100000000
 % Longitude = X, Latitude = Y
 %heatmap(T, "cellCentroidLongitude__", "cellCentroidLatitude__", "ColorVariable","id_grid");
