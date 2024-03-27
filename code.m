@@ -1,3 +1,4 @@
+clear all;
 close all;
 a = load("vent_1_mois.mat")
 
@@ -14,14 +15,17 @@ longitude = a.longitude;
 latitude = a.latitude;
 
 
-Nx = 95;
-Ny = 62;
+Nx = 93;
+Ny = 59;
 Nt = 248;
 T = 2;
-c0 = zeros(Nx, Ny) + 1*eye(Nx, Ny);
+c0 = zeros(Nx+2, Ny+2) + 10*eye(Nx+2, Ny+2);
+c0(1, 1) = 0;
+c0(Nx+2, Nx+2) = 0;
+
 %Ux = zeros(Nx, Ny,Nt); % Composante x de la vitesse du vent
 %Uy = ones(Nx, Ny,Nt); % Composante y de la vitesse du vent
-D = 0; % Coefficient de diffusion 
+D = 0.1; % Coefficient de diffusion 
 
 
 % Appel de la fonction
