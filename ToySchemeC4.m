@@ -14,7 +14,6 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
         c(2:Nx+1,2:Ny+1) = max(0, c(2:Nx+1,2:Ny+1) + dt * D * laplacien - dt * Ux(2:Nx+1,2:Ny+1,n) .* derivee_x - dt * Uy(2:Nx+1,2:Ny+1,n) .* derivee_y);
 
         heatmap(c)
-        clim([0 0.5])
         pause(0.01)
 
     end
