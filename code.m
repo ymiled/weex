@@ -17,7 +17,7 @@ latitude = a.latitude;
 Nx = 10;
 Ny = 10;
 Nt = 200;
-T = 2;
+T = 1;
 c0 = zeros(Nx+2, Ny+2);
 c0(6,6)=1;
 
