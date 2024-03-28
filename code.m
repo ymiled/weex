@@ -14,16 +14,15 @@ Uy = a.Uy;
 longitude = a.longitude;
 latitude = a.latitude;
 
-Nx = 93;
-Ny = 59;
-Nt = 248;
+Nx = 10;
+Ny = 10;
+Nt = 200;
 T = 2;
-c0 = zeros(Nx+2, Ny+2) + 10*eye(Nx+2, Ny+2);
-c0(1, 1) = 0;
-c0(Nx+2, Nx+2) = 0;
+c0 = zeros(Nx+2, Ny+2);
+c0(6,6)=1;
 
-%Ux = zeros(Nx, Ny,Nt); % Composante x de la vitesse du vent
-%Uy = ones(Nx, Ny,Nt); % Composante y de la vitesse du vent
+Ux = zeros(Nx+2, Ny+2,Nt); % Composante x de la vitesse du vent
+Uy = ones(Nx+2, Ny+2,Nt); % Composante y de la vitesse du vent
 D = 0.1; % Coefficient de diffusion 
 
 

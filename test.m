@@ -6,12 +6,12 @@ p=1;
 X=100;
 Y=100;
 a=load('vent_1_mois.mat');
-Ux=100*a.Ux;
-Uy=100*a.Uy;
-D=0;
+Ux=a.Ux;
+Uy=a.Uy;
+D=0.1;
 S=zeros(Nx,Ny,p);
 S((Nx+1)/2,Ny/2,1)=10;
 
 
-v=ones(p);
-FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,sources,rain_matrix,200,v);
+v=zeros(p);
+FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,sources,200,rain_matrix,v);
