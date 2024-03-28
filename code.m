@@ -13,13 +13,6 @@ Ux = a.Ux;
 Uy = a.Uy;
 longitude = a.longitude;
 latitude = a.latitude;
-Nx=95;
-Ny=62;
-p=1
-tau=0.05
-D=0.1
-S=zeros(Nx,Ny,zeros);
-
 
 Nx = 93;
 Ny = 59;
@@ -35,5 +28,5 @@ D = 0.1; % Coefficient de diffusion
 
 
 % Appel de la fonction
-c = ToySchemeC4(Nx, Ny, Nt, T, c0, Ux, Uy, D)
+c = ToySchemeC4(Nx, Ny, Nt, T, c0, Ux, Uy, D);
 
