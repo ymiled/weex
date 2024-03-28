@@ -26,5 +26,5 @@ D = 0; % Coefficient de diffusion
 
 
 % Appel de la fonction
-c = ToySchemeC4(Nx, Ny, Nt, T, c0, Ux, Uy, D);
+c = ToySchemeA3C4(Nx, Ny, Nt, T, c0, Ux, Uy, D);
 heatmap(c')
