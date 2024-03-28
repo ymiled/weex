@@ -9,7 +9,7 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
  
 
     %Resolution numérique avec Diffusion et convection, et vitesse Ux,Uy (vent)
-        for n=1:Nt
+    for n=1:Nt
         laplacien = (c(3:Nx+2,2:Ny+1) + c(1:Nx,2:Ny+1) + c(2:Nx+1,3:Ny+2) + c(2:Nx+1,1:Ny) - 4 * c(2:Nx+1,2:Ny+1))/ (dx * dy);
         derivee_x = (c(3:Nx+2,2:Ny+1) - c(1:Nx,2:Ny+1)) / (2*dx);
         derivee_y = (c(2:Nx+1,3:Ny+2)-c(2:Nx+1,1:Ny)) / (2*dy);
