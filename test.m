@@ -14,4 +14,4 @@ S((Nx+1)/2,Ny/2,1)=10;
 
 
 
-m=FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S)
+FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S)
