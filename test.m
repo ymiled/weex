@@ -13,5 +13,5 @@ S=zeros(Nx,Ny,p);
 S((Nx+1)/2,Ny/2,1)=10;
 
 
-
-FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S)
+v=ones(p);
+FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,sources,rain_matrix,200,v);
