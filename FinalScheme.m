@@ -1,12 +1,12 @@
 function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v)
-    %dx = X/Nx; %Avec Nx = 95 et Ny = 62
-    %dy = Y/Ny;
-    %dt = T/Nt;
-    dx=1/(Nx+1);
-    dy=1/(Ny+1);
+    
+    %dx=1/(Nx+1);
+    %dy=1/(Ny+1);
     dt=T/Nt;
+    dx = X/(Nx+1); %Avec Nx = 95 et Ny = 62
+    dy = Y/(Ny+1);
+    %m_air = zeros(Nx+2, Ny+2, p);
     m_air = zeros(Nx+2, Ny+2, p);
-    m_air = S;
 
     m_sol = zeros(Nx+2, Ny+2, p); %Les masses aux bords restent nulles
     for polluant=1:p
@@ -35,10 +35,10 @@ function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v)
             end
             m_air = m_air_temp;
 
-            heatmap(m_air(:, :, polluant)');
+            %heatmap(m_air(:, :, polluant)');
             title(sprintf('Evolution de la concentration du polluant %d', polluant));
-            clim([0 20])
-            pause(0.01);
+            %clim([0 20])
+            %pause(0.01);
                 
         end
     end
