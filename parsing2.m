@@ -17,7 +17,7 @@ sites_brulis = "Agriculture sur brûlis";
 site_fab_alim = "Fabrication d'aliments pour animaux de ferme";
 site_centrale_biomasse = "Centrale énergétique à charbon et à biomasse";
 sources = zeros(nbr_x, nbr_y, length(lst_nocifs));
-surface_driven = [lst_herbicides sites_brulis];
+surface_driven = [lst_sites_herbicides sites_brulis];
 cell_driven = [site_fab_alim site_centrale_biomasse];
 for i=1:length(T.id_grid)
     id = T{i, "id_grid"};
@@ -29,12 +29,12 @@ for i=1:length(T.id_grid)
     if surface == 0
         continue
     end
+    site_description;
     sources(x, y, :) = [(T{i, tcdd}*surface) (T{i, lst_herbicides} * surface * 10000) T{i, lst_polluants}];
     elseif any(site_description == cell_driven(:))
-     sources(x, y, :) = [(T{i, tcdd}*surface) (T{i, lst_herbicides} * surface * 10000) T{i, lst_polluants}]
+     sources(x, y, :) = [(T{i, tcdd}*surface) (T{i, lst_herbicides} * surface * 10000) T{i, lst_polluants}];
     end
 end
-
 rain_matrix = zeros(nbr_x, nbr_y);
 pop_matrix = zeros(nbr_x, nbr_y);
 surfaces_matrix = zeros(nbr_x, nbr_y, 3); %proportion de : 1: air urbain, 2: sol naturel, 3: sol agricole 

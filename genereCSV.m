@@ -32,7 +32,7 @@ for x=1:nbr_x
                 pol_matrix(i_pol, 5));
         end
     end
-    rep(id, 4 + 2 * n_polluants) = sum(rep(id, 5:2:2*n_polluants+3));
+    rep(id, 4 + 2 * n_polluants) = sum(rep(id, 4 + n_polluants:4+2*n_polluants));
 end
 
 T_reponse=array2table(rep,'VariableNames', ["id_grid" "cellCentroidLatitude__" "cellCentroidLongitude__" lst_nocifs lst_impacts_nocifs "impact"]);
