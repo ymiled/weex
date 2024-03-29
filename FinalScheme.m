@@ -1,4 +1,4 @@
-function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v)
+function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v, solubilite_polluants)
     
     %dx=1/(Nx+1);
     %dy=1/(Ny+1);
@@ -27,7 +27,7 @@ function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v)
                     else
                         derivee_y = (m_air(x, y+1, polluant) - m_air(x, y, polluant)) / dy;
                     end
-                    m_depot = (Hm(x, y)/dt + v(polluant)) * m_air(x, y, polluant) * (dt/H);
+                    m_depot = (solubilite_polluants(polluant) * Hm(x, y)/dt + v(polluant)) * m_air(x, y, polluant) * (dt/H);
                     m_sol(x, y) = m_sol(x, y) + m_depot;
                     m_air_temp(x, y, polluant) = (m_air(x, y, polluant) + dt * (D * laplacien - Ux(x, y, n) * derivee_x - Uy(x, y, n) .* derivee_y + S(x, y, polluant) - m_depot));
         
@@ -35,10 +35,10 @@ function [m_air,m_sol] = FinalScheme(Nx,Ny,X,Y,Nt,T,p,Ux,Uy,D,S,H,Hm,v)
             end
             m_air = m_air_temp;
 
-            %heatmap(m_air(:, :, polluant)');
+            heatmap(flip(m_air(:, :, polluant))');
             title(sprintf('Evolution de la concentration du polluant %d', polluant));
             %clim([0 20])
-            %pause(0.01);
+            pause(0.01);
                 
         end
     end
