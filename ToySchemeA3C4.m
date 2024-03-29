@@ -8,10 +8,11 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
     figure()
     %Resolution numérique avec Diffusion et convection, et vitesse Ux,Uy (vent)
     for n=1:Nt
+        ct = c;
         
         for i=2:Nx+1
             for j=2:Ny+1
-                laplacien = (c(i+1,j) + c(i-1,j) + c(i,j+1) + c(i, j-1) - 4 * c(i, j))/ (dx * dy);
+                laplacien = (c(i+1,j) + c(i-1,j) - 2 * c(i, j)) / dx + (c(i,j+1) + c(i, j-1) - 2 * c(i, j))/ dy;
                 if Ux(i,j,n) > 0
                     derivee_x = (c(i, j) - c(i-1,j)) / dx;
                 else
@@ -22,10 +23,11 @@ function c=ToySchemeC4(Nx,Ny,Nt,T,c0,Ux,Uy,D)
                 else
                     derivee_y = (c(i,j+1) - c(i,j)) / dy;
                 end
-                c(i, j) = c(i, j) + dt * D * laplacien - dt * Ux(i,j,n) .* derivee_x - dt * Uy(i,j,n) .* derivee_y;
+                ct(i, j) = c(i, j) + dt * D * laplacien - dt * Ux(i, j, n) * derivee_x - dt * Uy(i, j, n) * derivee_y;
 
             end
         end
+        c = ct;
         heatmap(c')
         pause(0.01)
     end
