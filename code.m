@@ -1,6 +1,6 @@
-clear all;
+clear;
 close all;
-a = load("vent_1_mois.mat")
+a = load("vent_1_mois.mat");
 
 
 % Load the image
@@ -14,19 +14,17 @@ Uy = a.Uy;
 longitude = a.longitude;
 latitude = a.latitude;
 
-Nx = 93;
-Ny = 59;
-Nt = 248;
-T = 2;
-c0 = zeros(Nx+2, Ny+2) + 10*eye(Nx+2, Ny+2);
-c0(1, 1) = 0;
-c0(Nx+2, Nx+2) = 0;
-
-%Ux = zeros(Nx, Ny,Nt); % Composante x de la vitesse du vent
-%Uy = ones(Nx, Ny,Nt); % Composante y de la vitesse du vent
-D = 0.1; % Coefficient de diffusion 
+Nx = 10;
+Ny = 10;
+Nt = 200;
+T = 100;
+c0 = zeros(Nx+2, Ny+2);
+c0(3, 3) = 1;
+Ux = zeros(Nx+2, Ny+2,Nt); % Composante x de la vitesse du vent
+Uy = ones(Nx+2, Ny+2,Nt); % Composante y de la vitesse du vent
+D = 0; % Coefficient de diffusion 
 
 
 % Appel de la fonction
-c = ToySchemeC4(Nx, Ny, Nt, T, c0, Ux, Uy, D);
-
+c = ToySchemeA3C4(Nx, Ny, Nt, T, c0, Ux, Uy, D);
+%heatmap(c')
